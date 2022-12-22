@@ -1,6 +1,9 @@
 /* Global Variables */
-const apiKey = '&units=metric&appid=89fed50841e0ba397c468f3fa49d2055';
+const apiKey = '&appid=89fed50841e0ba397c468f3fa49d2055&units=imperial';
 const baseUrl = 'http://api.openweathermap.org/data/2.5/forecast?zip='
+// Create a new date instance dynamically with JS
+let d = new Date();
+let newDate = d.getMonth() +1 +'.'+ d.getDate()+'.'+ d.getFullYear();
 
 const generateReq = document.getElementById('generate');
 generateReq.addEventListener('click', queryApi);
@@ -59,8 +62,7 @@ const postData = async ( url = '', data = {})=>{
   };
 
 // Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+
 // Async GET
 // Function to GET Project Data 
 const retrieveData = async (url='') =>{ 
@@ -76,10 +78,8 @@ const retrieveData = async (url='') =>{
     }
     };
 function updateUi(allData){
-    // x is the last item in the array.
-    let x = allData.length-1;
-    document.querySelector('#temp').innerHTML = Math.round(allData[x].temp) + ' degrees';
-    document.querySelector('#date').innerHTML = allData[x].date;
-    document.querySelector('#content').innerHTML = allData[x].userResponse;
+  document.querySelector('#temp').innerHTML = Math.round(allData.temp) + ' degrees';
+  document.querySelector('#date').innerHTML = allData.date;
+  document.querySelector('#content').innerHTML = allData.userResponse;
 
 }
